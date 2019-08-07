@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0px;
+        }
+        li{
+            float: left;
+            list-style: none;
+            width: 100px;
+            height: 50px;
+            background-color: aqua;
+            border: 5px solid black;
+            margin: 20px;
+            text-align: center;
+        }
+        a{
+            text-decoration: none;
+            display: block;
+            line-height: 50px;
+            width: 100px;
+            height: 50px;
+        }
+        div{
+            width: 450px;
+            margin: 200px auto;
+        }
+        img{
+            width: 450px;
+            height: 250px;
+            display: none;
+        }
+        .ac{
+            display: block;
+        }
+        .ccc{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <ul class="list">
+        <li class="ccc"><a href="javascript:;">第一张</a></li>
+        <li><a href="javascript:;">第二张</a></li>
+        <li><a href="javascript:;">第三张</a></li>
+    </ul>
+    <img src="img/1.jpg" alt="" class="ac">
+        <img src="img/2.jpg" alt="">
+        <img src="img/3.jpg" alt="">
+    </div>
+    <script>
+        var list = document.querySelectorAll("li")
+        var imgs = document.querySelectorAll("img")
+        for(var i = 0 ; i<list.length ; i++){
+            list[i].setAttribute("data-num",i)
+            list[i].onmouseenter =function (){
+                for(var j = 0 ; j<list.length ; j++){
+                    list[j].className=""
+                    imgs[j].className=""
+                }
+                this.className ="ccc"
+                var data =this.getAttribute("data-num")
+                imgs[data].className ="ac"
+            }
+        }
+    </script>
+</body>
+</html>

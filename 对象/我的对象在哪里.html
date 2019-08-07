@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var i = {
+            name : "代志刚",
+            age : "18",
+            hobby : ["football","backetball","pingpangball"],
+            "总结": "没有女朋友，难受",
+            "显示": function (){
+                for (var key in i) {
+                    console.log(key)
+                    console.log(i[key])
+                    if(key=="总结"){
+                        return
+                    }
+                }
+            }
+        }
+        i["显示"]();   
+    </script>
+</body>
+</html>

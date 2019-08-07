@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function fun(n){
+				if(n==1){
+					return 1
+				}
+				return fun(n-1)*n
+			}
+			function fun1(n){
+				return n*n
+			}
+			function fun2(n,m){
+				return n+m
+			}
+	document.write(fun2(fun(fun1(1)),fun(fun1(2))))
+		</script>
+	</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="tools.js"></script>
+    <style> 
+      .box{
+          margin: 0 auto;
+          width: 100px;
+          height: 200px;
+          border: 1px solid #cccccc;
+          overflow: hidden;
+          position: relative;
+      }
+      .contexts{
+          position: absolute;
+      }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="contexts">
+            <p>看不见我</p>
+            <p>看不见我</p>
+            <p>看不见我</p>
+            <p>看不见我</p>
+            <p>看不见我</p>
+            <p>看不见我</p>
+            <p>看不见我</p>
+            <p>看不见我</p>
+            <p>看不见我</p>
+            <p>看不见我</p>
+            <p>看不见我</p>
+            <p>看不见我</p>
+            <p>看不见我</p>
+            <p>看不见我</p>
+            <p>看不见我</p><p>看不见我</p>
+            <p>看不见我</p>
+        </div>
+    </div>
+    <script>
+        var box =document.querySelector(".box")
+        var content = document.querySelector(".contexts")
+        tools.on(box,"mousewheel",function(e){
+            var wheeld = e.wheelDelta;
+            if(wheeld>0){
+                var top = content.offsetTop + 3;
+                if(top>0) top = 0;
+                content.style.top = top + "px"
+            }else{
+                var a =box.clientHeight-content.offsetHeight
+                console.log(box.scrollHeight)
+                var top = content.offsetTop - 3;
+                if(top<a) top = a;
+                content.style.top = top + "px"
+            }
+        })
+    </script>
+</body>
+</html>

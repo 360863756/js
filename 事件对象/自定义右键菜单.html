@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="tools.js"></script>
+    <style>
+        ul{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        var ul = document.createElement("ul")
+        var cance = document.createDocumentFragment();
+        var li = document.createElement("li")
+        li.innerHTML="开始"
+        cance.appendChild(li)    
+        var li1 = document.createElement("li")
+        li1.innerHTML="结束" 
+        cance.appendChild(li1)
+        ul.appendChild(cance)
+        document.oncontextmenu = function (e){
+            e = e||event;
+            var left = e.clientX;
+            var top = e.clientY;
+            tools.css(ul,{
+                left : left + "px",
+                top  : top   + "px"
+            })
+            document.body.appendChild(ul)
+            if(e.preventDefault){
+                e.preventDefault()
+            }else{
+                return false
+            }
+        }  
+    </script>
+</body>
+</html>

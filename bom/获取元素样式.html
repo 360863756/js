@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="tools.js"></script>
+    <style>
+        .aa{
+            width: 200px;
+            height: 200px;
+            background: rebeccapurple;
+        }
+    </style>
+</head>
+<body>
+    <div class="aa"></div>
+    <script>
+        var aa =document.querySelector(".aa")
+        var j =getStyle(aa , "width")
+        var k =getComputedStyle(aa,false).width
+        console.log(k)
+    </script>
+</body>
+</html>

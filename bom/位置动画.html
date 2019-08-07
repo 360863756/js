@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            height: 100px;
+            width: 100px;
+            background-color: rebeccapurple;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    </div>
+    <script>
+        var i =document.querySelector("div")
+        var timer =setInterval(function (){
+            var j = i.offsetLeft;
+            i.style.marginLeft = j+2+"px"
+            var k =i.offsetTop;
+            i.style.marginTop = k+6+"px"
+            if(j>800||k>800){
+                clearInterval(timer)
+            }
+        },40)
+        setInterval(function (){
+            for(var l = 0,o="#" ;l< 3 ;l++){
+            var color =Math.floor(Math.random()*16).toString(16);
+            o+=color
+            }
+            i.style.backgroundColor=o;
+        },200)
+    </script>
+</body>
+</html>

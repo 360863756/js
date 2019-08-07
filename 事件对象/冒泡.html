@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .child{
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+        }
+        .divparent{
+            width: 200px;
+            height: 200px;
+            background-color: hsl(234, 38%, 47%);
+        }
+        .divgradeparent{
+            width: 400px;
+            height: 400px;
+            background-color: #a5584a;
+        }
+    </style>
+</head>
+<body>
+    <div class="divgradeparent">
+        <div class="divparent">
+            <div class="child">
+
+            </div>
+        </div>
+    </div>
+    <script>
+        var divgradeparent =document.querySelector(".divgradeparent")
+        var divparent =document.querySelector(".divparent")
+        var child =document.querySelector(".child")
+        child.onclick =function (e){
+            console.log("这是爷爷")
+            if(e.stopPropagation){
+                e.stopPropagation()
+            }else{
+                e.cancelBubble = true;
+            }
+        }
+        // divparent.onclick =function (){
+        //     console.log("这是爸爸")
+        // }
+        // divgradeparent.onclick =function (){
+        //     console.log("这是儿子")
+        // }
+        // document.onclick =function (){
+        //     console.log("这是祖先")
+        // }
+        child.addEventListener("click",function(){
+            console.log("这是儿子")
+        },true)
+        divparent.addEventListener("click",function(){
+            console.log("这是爸爸")
+        },true)
+        divgradeparent.addEventListener("click",function(){
+            console.log("这是爷爷")
+        },true)
+        document.addEventListener("click",function(){
+            console.log("这是祖先")
+        },true)
+        
+    </script>
+</body>
+</html>

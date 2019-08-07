@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="checkbox" id="aa">
+    <div>
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+    </div>
+    <script>
+        var i = document.querySelector("#aa")
+        var j = document.querySelectorAll("div input")
+        var num = 0 ;
+        console.log(i);
+        i.onchange = function () {
+            console.log(this.checked)
+            for(var k = 0 ; k <j.length ;k++){
+                j[k].checked = this.checked;
+                if(i.checked){
+                    num=5;
+                }else{
+                    num=0;
+                }
+            }
+        }
+        for(var q = 0 ; q <j.length ;q++){
+            j[q].onchange = function (){
+                if(this.checked){
+                    num++
+                }else{
+                    num--
+                }
+
+                i.checked= num==5;
+            }
+        }
+    </script>
+</body>
+</html>

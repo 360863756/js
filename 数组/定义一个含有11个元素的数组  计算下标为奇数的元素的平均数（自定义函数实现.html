@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//定义一个含有11个元素的数组  计算下标为奇数的元素的平均数（自定义函数实现）
+			var arr =new Array(11)
+			function fun(b){
+				for (var i = 0,j = 0,sum =0; i<b.length; i++) {
+					if(i%2==1){
+						sum+=b[i];
+						j++
+					}
+				}
+				var average =sum/j;
+				return average
+			}
+			arr = [1,2,3,4,5,6,7,8,9,10,11]
+			var b =fun(arr)
+			document.write(b)
+		</script>
+	</body>
+</html>

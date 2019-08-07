@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="tools.js"></script>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        var div = document.querySelector("div");
+        tools.on(div,"mousedown",function(e){
+                var divleft = e.offsetX;
+                var divtop  = e.offsetY;
+           document.onmousemove=function(e){
+                    var left = e.clientX-divleft;
+                    var top  = e.clientY-divtop;
+                    if(top < 0) top = 0;
+                    if(left < 0) left = 0;
+                    var right =tools.getBodySize().width-div.offsetWidth;
+                    var bottom =tools.getBodySize().height-div.offsetHeight;
+                    
+                    if(right<left) left =right;
+                    if(bottom<top) top = bottom;
+                    tools.css(div , {
+                    top : top +"px",
+                    left :left+"px"
+                })
+            
+                }
+            tools.on(document,"mouseup",function(e){
+                document.onmousemove=null;
+            })
+        })
+        
+    </script>
+</body>
+</html>

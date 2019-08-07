@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width:20px;
+            height: 20px;
+            background: red;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        var divs = document.createDocumentFragment()
+        for(var i = 0 ; i < 20 ; i++){
+            var div = document.createElement("div")
+            div.innerHTML =i+1
+            divs.appendChild(div)
+        }
+        document.body.appendChild(divs)
+        var divall = document.querySelectorAll("div")
+        document.onmousemove = function (e){
+            e = e || event;
+            var left =e.clientX;
+            var top = e.clientY;
+            for(var i = divall.length-2 ; i>=0 ; i--){
+             divall[i+1].style.top = divall[i].style.top;
+             divall[i+1].style.left = divall[i].style.left;
+            }
+            divall[0].style.left =left + "px";
+            divall[0].style.top = top + "px";
+        }
+    </script>
+</body>
+</html>

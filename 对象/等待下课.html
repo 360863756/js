@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        setInterval(function(){
+        var nowTime =new Date();
+        var now =nowTime.getTime();
+
+
+
+        nowTime.setHours(21,0,0);
+        var end = nowTime.getTime();
+
+
+        var time =parseInt((end - now)/1000);
+        var hour =parseInt(time/(60*60))
+        var min = parseInt((time%(60*60))/60)
+        var second = parseInt((time%(60*60))%60)
+        location.reload();
+        document.write("离下课还有"+hour+"小时"+min+"分钟"+second+"秒")
+    },1000)
+    </script>
+</body>
+</html>

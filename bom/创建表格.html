@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        table,td {
+            border: 1px solid #111;
+            border-collapse: collapse;
+
+        }
+        button{
+            border-radius:1px;
+            font-size: 12px;
+        }
+        .ccc{
+            background-color: #ccc;
+        }
+        .ddd{
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        var  jsn =[
+            {
+                1:"篮球",
+                2:180,
+                3:"志刚才能打"
+            },
+            {
+                1:"足球",
+                2:120,
+                3:"张霖可以打"
+            },
+            {
+                1:"相扑",
+                2:160,
+                3:"敬国剑可以打"
+            }
+        ]
+        var table = document.createElement("table")    
+        jsn.forEach(function (item , index) {
+            var tr =document.createElement("tr")
+            tr.id =index;
+            for (var key in item) {
+               var td = document.createElement("td")
+               td.innerHTML =item[key]
+               tr.appendChild(td)
+            }
+            var btn = document.createElement("td")
+            btn.innerHTML = "<button class='aa' >确认</button>";
+            tr.appendChild(btn);
+            table.appendChild(tr);
+        });
+        document.body.appendChild(table);
+        var trs =document.querySelectorAll("tr")
+        for(var i = 0; i <trs.length;i++){
+            if(i%2){
+                trs[i].className="ccc"
+            }
+            trs[i].onmouseenter =function(){
+                this.className="ddd"
+            }
+            trs[i].setAttribute("data-color",i);
+            trs[i].onmouseleave =function(){
+                var j = this.getAttribute("data-color")
+                if(j%2){
+                trs[j].className="ccc"
+            }else{
+                trs[j].className=""
+            }
+            }
+        }
+        var del =document.querySelectorAll(".aa")
+        for(var i = 0 ;i <del.length ;i++){
+            del[i].onclick =function(){
+                
+            //    var j = this.parentNode.parentNode
+            //     // if( j.parentNode) {
+            //     //     j.parentNode.removeChild("");
+            //     //   }
+            //     j.remove();
+            if(confirm("确认删除吗？？？？？？？")){
+            this.parentNode.parentNode.remove();
+            }
+        }
+        }
+    </script>
+</body>
+</html>

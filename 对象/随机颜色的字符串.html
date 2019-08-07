@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .a{
+            width: 100px;
+            height: 100px;
+           background-color:rebeccapurple;
+        }
+    </style>
+</head>
+<body>
+    <div class="a" id="colors" onmousemove="fun1()"></div>
+    <script>
+        function fun1(){
+            var i = document.getElementById("colors")
+            i.style.backgroundColor=fun()
+        }
+        function fun(){
+            for(var j = 0,k="#" ; j<6 ; j++){
+            var i =Math.floor(Math.random()*16).toString(16).toUpperCase();
+            k+=i
+            }
+            return k
+        } 
+    </script>
+</body>
+</html>

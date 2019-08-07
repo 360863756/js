@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        var str = prompt();
+        // var reg  = /\d/
+        // var reg  = /(\d)|([a-z])/i
+        // var reg  = /^\d$/
+        // var reg  = /\d{3,5}/
+        //只能用数字开头，长度在6--18位之间 
+        // var reg = /^\d.{5,17}$/
+        //以字母开头，数字结尾，中间任意一个字符
+        // var reg = /^[a-zA-Z].?\d$/
+        //密码不能少于6位的字符
+        // var  reg = /^.{6}/
+        // 以a开头   b字符至少出现2个，至多出现6个(b连续出现)
+        //变量的命名正则表达式(不能用数字开头 由字母、数字、下划线 、$组成) 
+        // var reg = /^[a-zA-Z_$][a-z0-9A-Z_$]*$/ 
+        // var reg = /^[a][b]{2,6}$/
+        var j =reg.test(str)    
+        console.log(j)
+    </script>
+</body>
+</html>

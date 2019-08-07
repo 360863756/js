@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 200px;
+            height: 200px;
+            background: red;
+            border: 10px solid black;
+            margin: 50px;
+            padding: 52px;
+            overflow: auto;
+        }
+        p{
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <p>人生总是匆匆忙忙，总杀杀</p>
+        <p>人生总是匆匆忙忙，总杀杀</p>
+        <p>人生总是匆匆忙忙，总杀杀</p>
+        <p>人生总是匆匆忙忙，总杀杀</p>
+        <p>人生总是匆匆忙忙，总杀杀</p>
+        <p>人生总是匆匆忙忙，总杀杀</p>
+        <p>人生总是匆匆忙忙，总杀杀</p>
+        <p>人生总是匆匆忙忙，总杀杀</p>
+        <p>人生总是匆匆忙忙，总杀杀</p>
+        <p>人生总是匆匆忙忙，总杀杀</p>
+        <p>人生总是匆匆忙忙，总杀杀</p>
+        <p>人生总是匆匆忙忙，总杀杀</p>
+        <p>人生总是匆匆忙忙，总杀杀</p>
+        <p>人生总是匆匆忙忙，总杀杀</p>
+    </div>
+    <script>
+        var i =document.querySelector("#box")
+        console.log(i.clientHeight)
+        console.log(i.scrollHeight)
+        console.log(i.offsetHeight)
+          i.scrollTop =  i.scrollHeight - i.clientHeight
+    </script>
+</body>
+</html>

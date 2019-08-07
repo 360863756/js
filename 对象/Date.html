@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <img src="img/0.png" alt="">
+        <img src="img/0.png" alt="">
+        时
+        <img src="img/0.png" alt="">
+        <img src="img/0.png" alt="">
+        分
+        <img src="img/0.png" alt="">
+        <img src="img/0.png" alt="">
+        秒
+    </div>
+    <script>
+        var imgs = document.getElementsByTagName("img");
+        setInterval(function(){
+        var time = new Date();
+        var hours= time.getHours();
+        var minutes = time.getMinutes();
+        var second  = time.getSeconds();
+        var str =fun(hours) + fun(minutes) + fun(second)
+        console.log(str)
+        for(var i = 0 ; i<imgs.length;i++){
+            imgs[i].src="img/"+str[i]+".png"
+        }
+        }, 1000);
+        function fun(n){
+            return n<10 ? "0"+ n :""+ n
+        }
+    </script>
+</body>
+</html>

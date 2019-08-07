@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var a = new Array(5,3,4,7,8,6,5)
+			// 最大值
+			function Max(num){
+				var max = 0
+				for(var i=0;i<num.length;i++){
+					if(num[i]>max ){
+						max=num[i]
+					}
+				}
+				return max
+			}
+			// 交换2个数
+			function change(n,m){
+				var i = n;
+				n=m;
+				m=i;
+				return (n,m)
+			}
+			//冒泡排序
+			function fun(num){
+				for(var i=0;i<num.length-1;i++){
+					for(var j = 1;j<num.length;j++){
+						if(num[i]>num[j]){
+							change(num[i],num[j])
+						}
+					}
+				}
+			}
+document.write(fun(a))
+		</script>
+		
+	</body>
+</html>

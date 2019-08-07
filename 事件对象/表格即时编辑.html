@@ -1,0 +1,258 @@
+
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <style>
+    *{ margin:0; padding:0; font-size:14px}
+    #box{ width:500px; margin:100px auto}
+    table,th,td{ border:1px solid #000; border-collapse:collapse}
+    td,th{ width:100px; height:30px; padding:10px}
+    input[type="text"]{ display:none; height:24px; width:60px; border:1px solid #ccc;}
+    tbody tr td:first-child{text-align: center;}
+    tfoot td{text-align: right;}
+    .editBtn{ color:#666}
+    .delBtn{ color:red}
+    .okBtn,.cancelBtn{ display:none}
+    
+    .edit span{ display:none}
+    .edit input[type="text"]{ display:inline-block}
+    .edit .editBtn,.edit .delBtn{ display:none}
+    .edit .okBtn,.edit .cancelBtn{ display:inline}
+    </style>
+    
+    </head>
+    
+    <body>
+    <div id="box">
+      <table>
+        <thead>
+          <tr>
+                  <th><label>全选：<input type="checkbox" id="allCheck"/></label></th>
+                  <th>名称</th>
+                  <th>单价</th>
+                  <th>数量</th>
+                  <th>编辑</th>
+              </tr>
+        </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox" class="check"/></td>
+                  <td><span>张三</span><input type="text"></td>
+                  <td><span>18</span><input type="text"></td>
+                  <td><span>1</span><input type="text"></td>
+                  <td>
+                    <a href="javascript:;" class="editBtn">编辑</a>
+                    <a href="javascript:;" class="okBtn">确定</a>
+                    <a href="javascript:;" class="cancelBtn">取消</a>
+                    <a href="javascript:;" class="delBtn">删除</a>
+                  </td>
+      
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="check"/></td>
+                  <td><span>李四</span><input type="text"></td>
+                  <td><span>25</span><input type="text"></td>
+                  <td><span>2</span><input type="text"></td>
+                  <td><a href="javascript:;" class="editBtn">编辑</a><a href="javascript:;" class="okBtn">确定</a> <a href="javascript:;" class="cancelBtn">取消</a><a href="javascript:;" class="delBtn">删除</a></td>
+      
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="check"/></td>
+                  <td><span>小强</span><input type="text"></td>
+                  <td><span>22</span><input type="text"></td>
+                  <td><span>3</span><input type="text"></td>
+                  <td><a href="javascript:;" class="editBtn">编辑</a><a href="javascript:;" class="okBtn">确定</a> <a href="javascript:;" class="cancelBtn">取消</a><a href="javascript:;" class="delBtn">删除</a></td>
+      
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="check"/></td>
+                  <td><span>小明</span><input type="text"></td>
+                  <td><span>16</span><input type="text"></td>
+                  <td><span>4</span><input type="text"></td>
+                  <td><a href="javascript:;" class="editBtn">编辑</a><a href="javascript:;" class="okBtn">确定</a> <a href="javascript:;" class="cancelBtn">取消</a><a href="javascript:;" class="delBtn">删除</a></td>
+      
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="5">总价：￥<b id="money">0</b></td>
+              </tr>
+            </tfoot>
+       </table>
+    </div>
+    <script>
+      function reload(){
+       editBtns = document.querySelectorAll('.editBtn')
+       okBtns = document.querySelectorAll('.okBtn')
+       cancelBtn = document.querySelectorAll(".cancelBtn") 
+       delBtn = document.querySelectorAll(".delBtn")
+       check   = document.querySelectorAll(".check")
+       allCheck = document.querySelector("#allCheck")
+      }
+      var editBtns,okBtns,cancelBtn,delBtn,check,allCheck;
+      var keywords = 0;
+      var num = 0 ;
+      reload();
+      //..............................编辑.......................
+      Array.from(editBtns).forEach(function (btn) {
+        btn.onclick = function () {
+          // 找到当前这一行tr，给他添加上class eidt
+          var tr = btn.parentNode.parentNode
+          tr.className = 'edit'
+          // 找到当前行的所有span，把innerHTML赋值给对应的input
+          var spans = tr.querySelectorAll('span')
+          Array.from(spans).forEach(function (span) {
+            span.nextElementSibling.value = span.innerHTML
+          })
+        }
+      })
+      //。。。。。。。。。。。。。。。取消。。。。。。。。。。。。。。。
+      Array.from(cancelBtn).forEach(function (btn){
+        btn.onclick = function (){
+          var tr = btn.parentNode.parentNode
+          tr.className=""
+        }
+
+      })
+      //。。。。。。。。。。。。。。删除。。。。。。。。。。。
+      Array.from(delBtn).forEach(function (btn,index){
+        btn.onclick = function (){
+          keywords=keywords + 1;
+          if(check[index].checked){
+          num = num-1;
+          }
+          console.log(num,keywords)
+          if(num === 4-keywords){
+            allCheck.checked=true;
+          }
+          var tr =this.parentNode.parentNode
+          if(confirm("确定删除吗？？？？")){
+          tr.remove();
+          reload();
+          var money =document.querySelector("#money");
+          console.log(money);
+          var prese = 0;
+          Array.from(check).forEach(function(check){
+        reload();
+        var span =check.parentNode.parentNode.querySelectorAll("span");
+              // console.log(span)
+              var j =1;
+              span.forEach(function(span , index , Array){
+                if(index>0){
+                  var i = span.innerHTML;
+                  j *=i;
+                }
+              })
+              if(check.checked){
+              prese = prese+j
+              }
+           
+        })
+        money.innerHTML =prese
+          }
+        }
+      })
+      //。。。。。。。。。。。。。。。。确定。。。。。。。。。。。。。。。
+      Array.from(okBtns).forEach(function (btn) {
+        btn.onclick = function () {
+          // 找到tr，把class移出掉
+          // 把input的value值赋给对应span的innerHTML
+          var tr = btn.parentNode.parentNode
+          tr.className = ''
+          var spans = tr.querySelectorAll('span')
+          Array.from(spans).forEach(function (span) {
+            span.innerHTML = span.nextElementSibling.value
+          })
+          reload();
+          var money =document.querySelector("#money");
+          console.log(money);
+          var prese = 0;
+          Array.from(check).forEach(function(check){
+        reload();
+        var span =check.parentNode.parentNode.querySelectorAll("span");
+              // console.log(span)
+              var j =1;
+              span.forEach(function(span , index , Array){
+                if(index>0){
+                  var i = span.innerHTML;
+                  j *=i;
+                }
+              })
+              if(check.checked){
+              prese = prese+j
+              }
+           
+        })
+        money.innerHTML =prese;
+        }
+      })
+      //。。。。。。。。。。全选属性改变时。。。。。。。。。。。。。
+      allCheck.onchange = function (){
+        reload()
+        var money  = document.querySelector("#money")
+        var prese = 0;
+        Array.from(check).forEach(function(check , index ,Array){
+            check.checked = allCheck.checked;
+            if(allCheck.checked){
+              num = 4-keywords
+              var span =check.parentNode.parentNode.querySelectorAll("span");
+              // console.log(span)
+              var j =1;
+              span.forEach(function(span , index , Array){
+                if(index>0){
+                  var i =Number(span.innerHTML);
+                  j *=i;
+                }
+              })
+              prese = prese+j
+            }else{
+              num = 0
+              prese = 0;
+            }
+            // allCheck.checked ? num = 4 : num = 0
+        })
+        money.innerHTML =prese;
+      }
+      //。。。。。。。。。。。。。。。。。。单选属性改变时。。。。。。。。。。。。。。
+      Array.from(check).forEach(function(check){
+        reload();
+        var span =check.parentNode.parentNode.querySelectorAll("span");
+              // console.log(span)
+              // console.log(j)
+            check.onchange = function (){
+              reload()
+              // console.log(keywords)
+              var j =1;
+              span.forEach(function(span , index , Array){
+                if(index>0){
+                  var i = span.innerHTML;
+                  j *=i;
+                }
+              })
+              var money =check.parentNode.parentNode.parentNode.parentNode.querySelector("#money");
+              var prese = Number(money.innerHTML)
+              if(check.checked){
+              num++;
+              prese = prese+j
+              money.innerHTML =prese
+              }else{
+                num--
+                prese = prese-j
+                money.innerHTML =prese
+              }
+              // check.checked ? num++ :num--
+              console.log(num)
+              console.log(keywords)
+              if(num===(4-keywords)){
+                allCheck.checked = true;
+              }else{
+                allCheck.checked = false;
+              }
+            //  allCheck.checked= num===4
+            }
+        })
+    </script>
+    </body>
+    </html>
+    

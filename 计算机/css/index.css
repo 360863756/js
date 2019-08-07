@@ -1,0 +1,29 @@
+@charset "utf-8";
+#count{
+	border: 1px solid #aaa;
+	width: 230px;
+	height: 25px;
+	margin-bottom:20px;
+	border-radius: 12.5px;
+	padding: 0px 20px;
+	}
+fieldset{
+	border: 3px solid #CCCCCC;
+	border-radius: 10px;
+	width: 250px;
+	margin: 100px auto;
+	padding: 30px 20px 20px 20px;
+	background-color: aquamarine;
+}	
+.same{
+	width: 45px;
+	height: 45px;
+	border: 1px solid #CCCCCC;
+	margin: 5px;
+	cursor: pointer;
+}
+.same:hover{
+	 background-color: yellowgreen;
+	 border-radius: 20px;
+	 transition: all 0.3s linear;
+ }	 

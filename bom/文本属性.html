@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+    <div>
+        <p id="dd">aaaa</p>
+    </div>
+<body>
+    <script>
+        var a = document.querySelector("#dd")
+        var div = document.querySelector("div")
+        console.log(a)
+        console.log(div)
+        console.log(div.childNodes)
+        console.log(div.innerHTML)
+        div.childNodes[0].nodeValue ="ccc"
+        console.log(div.outerHTML)
+        console.log(div.innerText)
+    </script>
+</body>
+</html>
