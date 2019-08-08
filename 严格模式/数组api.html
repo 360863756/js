@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+            var arr = [1,2,3,4,2,3,5,2,3]
+            var arr1 =arr.map(function (item){
+                return item*2
+            })
+            console.log(arr1)
+            var arr2 = arr.filter(function (item){
+                return item<4
+            })
+            console.log(arr2)
+            var arr3 = arr.some(function (item){
+
+                return item>    10
+            })
+            console.log(arr3)
+            var arr4 = arr.every(function (item){
+                return item >3
+            })
+            console.log(arr4)
+            var arr5 = arr.reduce(function (prev , next){
+                return prev + next
+            },100)
+            console.log(arr5)
+    </script>   
+</body>
+</html>
