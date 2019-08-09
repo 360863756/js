@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // "use strict"
+        // var a = 0;//没有定义a变量，要用var 定义
+        // var f =function (){
+        //     return arguments.callee;
+        // };
+        // f();
+        //合并对象
+        var a ={
+            name : "as",
+            age : "c\"c\""
+        }
+        var b ={
+            name : "asdafsag",
+            gender : "cc"
+        }
+        var v = Object.assign({},a,b)
+        console.log(v)
+    </script>
+</body>
+</html>

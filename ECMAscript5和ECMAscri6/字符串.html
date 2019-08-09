@@ -29,8 +29,15 @@
         var date= Date.now();
         console.log(date);
         var obj = new Object();
-        Object.definePropertiy(obj,"name",{
+        Object.defineProperty(obj,"name",{
+            configurable :false,//不能删除此属性
+            writable:true,
+            value  :"zhangsan"
         })
+        console.log(obj)
+        delete obj.name
+        obj.name ="lisi" 
+        console.log(obj.name)
     </script>
 
 </body>
