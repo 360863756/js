@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="tools.js"></script>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        var div = document.querySelector("div")
+        // div.onclick = function (){
+        //     var end  = 500;
+        //     var time = 4000;
+        //     var timer = setInterval(()=>{
+        //         var start =parseInt(tools.getStyle(div,"left"));
+        //         var distence =Math.ceil((end-start)/10)
+        //         div.style.left = start + distence + "px";
+        //         if(start === end){
+        //             clearInterval(timer)
+        //         }
+        //     },30)
+            
+        // }
+        //匀减速运动。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。
+        div.onclick = function (){
+            clearInterval(div.timer)
+            var start = 0 ;
+            var end  = 500;
+            var time = 5000;
+            var step = parseInt(time/30) ;
+            var speed =parseInt(((end-start)/step));
+            var n = 0;
+            div.timer = setInterval(function (){
+                n++
+                div.style.left = start + n*speed +"px"
+                if(n===step){
+                    clearInterval(div.timer)
+                }
+            },30) 
+        }
+
+    </script>
+</body>
+</html>

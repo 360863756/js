@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        img{
+            position: absolute;
+            left:0;
+            top:50px;
+			
+        }
+        #demo{
+            width:1000px;
+            margin:0 auto;
+        }
+    </style>
+	<script src="tools.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <img src="img/aside.jpg" alt="" id="pic"/>
+  <div id="demo">
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+</div>
+<script>
+    var img =document.querySelector("img");
+    var start1 =  parseInt(tools.getStyle(img , "top"))
+    document.onscroll = function (){
+    clearInterval(img.timer)
+    var top =parseInt(document.documentElement.scrollTop || document.body.scrollTop)
+    var distence =0
+   img.timer = setInterval(() => {
+    distence += Math.ceil(top/10)
+    img.style.top=start1+distence+"px"
+    top = top - Math.ceil(top/10);
+    if(top===0){
+    clearInterval(img.timer)
+    }
+    }, 30);
+   
+    }
+</script>
+</body>
+</html>

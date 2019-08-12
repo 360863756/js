@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        img{
+            position: absolute;
+            left:0;
+            top:50px;
+			
+        }
+        #demo{
+            width:1000px;
+            margin:0 auto;
+        }
+    </style>
+	<script src="tools.js"></script>
+	<script>
+    window.onload = function () {
+      var img = document.querySelector('#pic')
+      window.onscroll = function () {
+         // 获取起始点和中止点
+         var start = parseInt(tools.getStyle(img, 'top'))
+         var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+         var end = scrollTop + 50
+         tools.move(img, 'top', end, 1000)
+         // TODO: 改造成缓冲运动
+      }
+      document.querySelector("img").onclick = function (){
+          location.replace("http://www.4399.com/flash/78072.htm#search3")
+      }
+    }
+	</script>
+</head>
+	
+<body>
+	<img src="img/aside.jpg" alt="" id="pic"/>
+  <div id="demo">
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+   <p>天王盖地虎，小鸡炖蘑菇</p>
+</div>
+</body>
+</html>

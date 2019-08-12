@@ -88,16 +88,17 @@ var tools = {
    * 
    */
   move: function (obj , attr , end , duration , fn){
+      clearInterval(obj.timer)
       var start = parseInt(this.getStyle(obj , attr))
       var distance = end - start;
       var steps =parseInt(duration/30);
       var speed = distance/steps;
       var num = 0;
-      var timer =setInterval(function(){
+      obj.timer =setInterval(function(){
         num++
         obj.style[attr] = start + speed*num + "px";
         if(num === steps){
-          clearInterval(timer)
+          clearInterval(obj.timer)
           obj.style[attr] = end + "px"
           fn&&fn()
         }
