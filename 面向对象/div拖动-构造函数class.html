@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        h3{
+            background: #cccccc;
+            cursor: move;
+        }
+    </style>
+    <script src="tools.js"></script>
+</head>
+<body>
+    <div id='box1'></div>
+    <div id="box2"><h3>title</h3></div>
+    <script>
+        class Drag {
+            constructor(obj1 , obj2){
+                this.obj1 = document.querySelector(obj1);
+                this.obj2 = obj2 ? this.obj1.querySelector(obj2) : this.obj1
+                this.frame();
+            }
+            //坐标计算。。。。。。。。。。。。。。。。。。。。
+            frame(){
+                this.obj2.onmousedown = (e)=>{
+                    var eLeft = e.offsetX;
+                    var eTop = e.offsetY;
+                    document.onmousemove = (e)=>{
+                       let left =  e.clientX -eLeft;
+                       let top = e.clientY - eTop;
+                       this.move({left,top});
+                    }
+                }
+                document.onmouseup = ()=>{
+                    document.onmousemove=null;
+                }
+                
+            }
+            move(obj){
+                if(obj.left<0) obj.left=0;
+                if(obj.top<0) obj.top = 0;
+                if(obj.left>tools.getBodySize().width-this.obj1.offsetWidth)
+                obj.left=tools.getBodySize().width-this.obj1.offsetWidth
+                if(obj.top>tools.getBodySize().height-this.obj1.offsetHeight)
+                obj.top=tools.getBodySize().height-this.obj1.offsetHeight
+                obj.left += 'px'
+                obj.top  += 'px'
+                tools.css(this.obj1 , obj)
+            }
+        }
+        new Drag("#box2","h3")
+        new Drag("#box1")
+    </script>
+</body>
+</html>

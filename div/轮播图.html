@@ -23,11 +23,11 @@ img{width:850px; height:500px;}
 <body>
 <div id="div1">
 	<ul>
-    	<li class="ac"><a href="javascript:alert(0);"><img src="1.jpg" /></a></li>
-    	<li><a href="javascript:alert(1);"><img src="2.jpg" /></a></li>
-    	<li><a href="javascript:alert(2);"><img src="3.jpg" /></a></li>
-    	<li><a href="javascript:alert(3);"><img src="4.jpg" /></a></li>
-    	<li><a href="javascript:alert(4);"><img src="5.jpg" /></a></li>
+    	<li class="ac"><a href="javascript:alert(0);"><img src="img/1.jpg" /></a></li>
+    	<li><a href="javascript:alert(1);"><img src="img/2.jpg" /></a></li>
+    	<li><a href="javascript:alert(2);"><img src="img/3.jpg" /></a></li>
+    	<li><a href="javascript:alert(3);"><img src="img/4.jpg" /></a></li>
+    	<li><a href="javascript:alert(4);"><img src="img/5.jpg" /></a></li>
     </ul>
     <ol>
     	<li class="ac">1</li>
@@ -39,6 +39,57 @@ img{width:850px; height:500px;}
     <a href="javascript:;" id="goPrev">&laquo;</a>
     <a href="javascript:;" id="goNext">&raquo;</a>
 </div>
-    
+	<script>
+		var lickLi = document.querySelectorAll("div ol li")
+		var imgLi = document.querySelectorAll("div ul li")
+		var goPrev = document.querySelector("#goPrev")
+		var goNext = document.querySelector("#goNext")
+		var div = document.querySelector("div")
+		var nowName  = 0;
+		var lastName = 0;
+		Array.from(lickLi).forEach(function (item ,index){
+			item.onclick = function (){
+				lastName = nowName;
+				nowName = index;
+				lickLi[lastName].className="";
+				imgLi[lastName].className ="";
+				this.className="ac";
+				imgLi[nowName].className="ac";
+			}
+		})
+		goNext.onclick =function (){
+				lastName = nowName;
+				nowName++;
+				if(nowName>4){
+					nowName=0
+				}
+				lickLi[lastName].className="";
+				imgLi[lastName].className ="";
+				lickLi[nowName].className ="ac";
+				imgLi[nowName].className="ac";
+		}
+		goPrev.onclick =function (){
+				lastName = nowName;
+				nowName--;
+				if(nowName<0){
+					nowName=4
+				}
+				lickLi[lastName].className="";
+				imgLi[lastName].className ="";
+				lickLi[nowName].className ="ac";
+				imgLi[nowName].className="ac";
+		}
+		var timer = setInterval(function (){
+			goNext.onclick();
+		},1000)
+		div.onmouseenter = function (){
+			clearInterval(timer)
+		}
+		div.onmouseleave = function (){
+			timer = setInterval(function (){
+			goNext.onclick();
+		},1000)
+		}
+	</script>
 </body>
 </html>

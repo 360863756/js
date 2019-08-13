@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    #tab {
+      width: 400px;
+      margin: 0 auto;
+    }
+    li {
+      list-style: none;
+      float: left;
+      width: 100px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+    }
+    li.ac {
+      background: #ccc;
+    }
+    #tab a {
+      display: block;
+      width: 400px;
+      display: none;
+    }
+    #tab a.ac {
+      display: block;
+    }
+    #tab img {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="tab">
+    <ul>
+      <li class="ac">item1</li>
+      <li>item2</li>
+      <li>item3</li>
+    </ul>
+    <div>
+      <a class="ac" href="javascript:;"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564742663358&di=3a46aff0cedda588eb8580b5766a6f6c&imgtype=0&src=http%3A%2F%2Fi1.hdslb.com%2Fbfs%2Farchive%2F2420e176e84a6126341688797ce48e42c832737e.jpg"></a>
+      <a href="javascript:;"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564742665772&di=16f29da898b2ecf76c6b9822f9f5ae92&imgtype=0&src=http%3A%2F%2Fi6.hexun.com%2F2018-03-21%2F192665231.jpg"></a>
+      <a href="javascript:;"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564742672256&di=155888c84aa49221db68d65bb83828d0&imgtype=0&src=http%3A%2F%2Fww2.sinaimg.cn%2Flarge%2F7529dfcdjw1euui0w36tlj22gw1na7wh.jpg"></a>
+    </div>
+  </div>
+  <script>
+    class img {
+      constructor(){
+        this.liChoice = Array.from(document.querySelectorAll('#tab li'));
+        this.imgChoice  = Array.from(document.querySelectorAll('#tab a'));
+      }
+      init(){
+        console.log(this.liChoice)
+        // console.log(Array.from(this.liChoice))
+        this.liChoice.forEach((item , index)=>{
+          console.log(index)
+            item.onclick =  ()=>{
+              console.log(this.liChoice)
+              for(let j = 0 ; j<this.liChoice.length ; j++){
+              this.liChoice[j].className =""
+              this.imgChoice[j].className=""
+              }
+              this.liChoice[index].className = "ac"
+              this.imgChoice[index].className="ac"
+             }
+            }
+        )
+        
+        // for(let i = 0 ; i<this.liChoice.length ; i++){
+        //   this.liChoice[i].onclick = ()=>{
+        //     for(let j = 0 ; j<this.liChoice.length ; j++){
+        //       this.liChoice[j].className =""
+        //       this.imgChoice[j].className=""
+        //     }
+        //       this.liChoice[i].className = "ac"
+        //       this.imgChoice[i].className="ac"
+        //      }
+        // }
+        // for (var key in this.liChoice) {
+        //   console.log(key)
+        //   this.liChoice[key].onclick =function (){
+        //        this.className = "ac"
+        //        this.imgChoice[key].className="ac"
+        //   }
+        // }
+        // for (let key of this.liChoice) {
+        //   console.log(key)
+        //   key.onclick =()=>{
+        //         key.className = "ac"
+        //    }
+        // }
+      }
+    }
+    var i =new img();
+    i.init();
+  </script>
+</body>
+</html>
