@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>瀑布流图片展示</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        a,
+        img {
+            border: 0;
+        }
+
+        #box {
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .item {
+            box-shadow: 2px 2px 2px #999;
+            position: absolute;
+        }
+    </style>
+    <script src="tools.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <div class="item"><img src="img/01.jpg"></div>
+        <div class="item"><img src="img/02.jpg"></div>
+        <div class="item"><img src="img/03.jpg"></div>
+        <div class="item"><img src="img/04.jpg"></div>
+        <div class="item"><img src="img/05.jpg"></div>
+        <div class="item"><img src="img/06.jpg"></div>
+        <div class="item"><img src="img/07.jpg"></div>
+        <div class="item"><img src="img/08.jpg"></div>
+        <div class="item"><img src="img/09.jpg"></div>
+        <div class="item"><img src="img/10.jpg"></div>
+        <div class="item"><img src="img/11.jpg"></div>
+        <div class="item"><img src="img/12.jpg"></div>
+        <div class="item"><img src="img/13.jpg"></div>
+        <div class="item"><img src="img/14.jpg"></div>
+        <div class="item"><img src="img/15.jpg"></div>
+        <div class="item"><img src="img/16.jpg"></div>
+        <div class="item"><img src="img/17.jpg"></div>
+    </div>
+    <script>
+        window.onload = function () {
+            var num = 65;
+            var box;
+            var div;
+            var dis = 8;
+            var divWidth;
+            var windowWidth;
+            var cols;
+            var arr;
+            fun();
+            function fun() {
+                box = document.querySelector("#box")
+                div = box.querySelectorAll(".item")
+                divWidth = div[0].offsetWidth;
+                windowWidth = document.documentElement.clientWidth || document.body.clientWidth;
+                cols = parseInt(windowWidth / divWidth)
+                tools.css(box, {
+                    width: divWidth * cols + (cols - 1) * dis + "px",
+                })
+                arr = new Array(cols)
+                for (var i = 0; i < div.length; i++) {
+                    if (i < cols) {
+                        tools.css(div[i], {
+                            top : "0px",
+                            left: (divWidth + dis) * i + "px"
+                        })
+                        arr[i] = div[i].offsetHeight;
+                    } else {
+                        for (var j = 1, min = 0; j < arr.length; j++) {
+                            if (arr[j] < arr[min]) min = j
+                        }
+                        tools.css(div[i], {
+                            left: (divWidth + dis) * min + "px",
+                            top: arr[min] + dis + "px"
+                        })
+                        arr[min] += div[i].offsetHeight + dis
+                    }
+                }
+            }
+            window.onscroll = function () {
+                var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+                var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
+                var height = arr[cols - 1];
+                if (scroll + windowHeight >= height - 10) {
+                    num++
+                    var m = String.fromCharCode(num)
+                    var can = document.createDocumentFragment();
+                    for (var i = 1; i <= 17; i++) {
+                        var div = document.createElement("div")
+                        if (i < 10) {
+                            div.className = "item"
+                            div.classList.add(m)
+                            div.innerHTML = `<img src="img/0${i}.jpg">`
+                        } else {
+                            div.className = "item"
+                            div.classList.add(m)
+                            div.innerHTML = `<img src="img/${i}.jpg">`
+                        }
+                        can.appendChild(div)
+                    }
+                    box.appendChild(can)
+                    var newdiv = document.querySelectorAll(`.${m}`)
+                    for (var k = 0; k < newdiv.length; k++) {
+                        for (var j = 1, min = 0; j < arr.length; j++) {
+                            if (arr[j] < arr[min]) min = j
+                        }
+                        tools.css(newdiv[k], {
+                            left: (divWidth + dis) * min + "px",
+                            top: arr[min] + dis + "px"
+
+                        })
+                        arr[min] += newdiv[k].offsetHeight + dis;
+                    }
+                    
+                }
+            }
+            window.onresize = function () {
+
+                    fun()
+                
+        }
+        }
+
+    </script>
+</body>
+
+</html>

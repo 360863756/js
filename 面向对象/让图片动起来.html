@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>贪吃蛇</title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+			}
+
+			body {
+				position: relative;
+			}
+
+			#gameMap {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				margin: auto;
+				width: 800px;
+				height: 500px;
+				font-size: 0px;
+				background: #000000;
+			}
+
+			h1 {
+				width: 200px;
+				color: white;
+				text-align: center;
+				position: absolute;
+				top: 300px;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				margin: auto;
+				cursor: pointer;
+			}
+
+			h1:hover {
+				color: red;
+			}
+
+			h3 {
+				width: 300px;
+				color: white;
+				text-align: center;
+				position: absolute;
+				top: 350px;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				margin: auto;
+			}
+
+			span {
+				display: inline-block;
+				/* box-sizing: border-box; */
+			}
+
+			.snake {
+				position: absolute;
+				background-color: red;
+				border-radius: 50%;
+			}
+
+			.food {
+				position: absolute;
+				background-color:blue;
+				border-radius: 50%;
+			}
+			#sum{
+				width:150px;
+				height: 50px;
+				background: gray;
+				position: absolute;
+				top: 580px;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				margin: auto;
+				text-align: center;
+				color: white;
+				line-height: 50px;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="gameMap"></div>
+		<h1>开始游戏</h1>
+		<audio id="Audio" loop="loop">
+			<source src="audio/贪吃蛇BGM.mp3">
+		</audio>
+		<h3>WSAD上下左右</h3>
+		<div id="sum">您的得分：0分</div>
+	</body>
+</html>
+<script type="text/javascript">
+	let h1 = document.querySelector("h1");
+	let h3 = document.querySelector("h3");
+	let sum = document.getElementById("sum");
+	let i=null;//初始话得分
+	let snake = [] // 创建容纳蛇的数组
+	h1.onclick = function(evt) { //点击开始游戏
+		document.getElementById("Audio").play();
+		let e = evt || event;
+		h1.style.display = "none";
+		h3.style.display = "none";
+		sum.style.display = "block";
+		
+		//1.创建地图
+		
+		let box = { //每一个方块的高度,因为贪吃蛇吃到东西是必须要精确的坐标才可以吃到东西,所以我打算用span铺满游戏界面
+			width: 20,
+			height: 20,
+		};
+		function map() {
+			let gameMap = document.getElementById("gameMap"); //获取地图
+			let row = Math.floor(gameMap.offsetWidth / box.width); //列：游戏界面的宽度除以盒子的宽度就等于需要创建多少个box
+			let rol = Math.floor(gameMap.offsetHeight / box.height); //行：游戏界面的高度除以盒子的宽度就等于需要创建多少个box
+			let num = row * rol; //行列相乘就是总共需要的box
+			let newSpan = null; //给新建的span定义并置空,其实不置空也可以,个人习惯;
+			for (let i = 0; i < num; i++) { //循环创建num个span
+				newSpan = document.createElement("span"); //创建span
+				newSpan.style.width = box.width + "px";
+				newSpan.style.height = box.height + "px";
+				gameMap.appendChild(newSpan); //把新建的span添加到地图上
+			}
+		}
+		map()
+
+		//2.创建蛇
+	
+		function createSnake() {
+			let snakeBody = null;
+			let gameMap = document.getElementById("gameMap"); //获取地图
+			for (let i = 0; i < 3; i++) { //i的值就是初始的蛇的长度,想是几节就写几
+				snakeBody = document.createElement("span");
+				snakeBody.style.width = box.width + "px"; 
+				snakeBody.style.height = box.height + "px";
+				snakeBody.style.left = 0 + "px";//蛇的初始位置
+				snakeBody.style.top = "0px";
+				snakeBody.className = "snake"; //声明body的class名是snake,通过css样式span.snake改变颜色
+				gameMap.appendChild(snakeBody);
+				snake.push(snakeBody); //把创建好的span在snake的尾部插入
+			}
+		}
+		createSnake()
+// 
+// 		//3.让蛇移动
+// 		
+		let dir=3;
+		document.onkeypress=function(evt){
+			let e = evt || event;
+			let key = e.keyCode = e.which = e.charCode;
+			if(key==97){
+				dir=0;
+			}else if(key==100){
+				dir=1;
+			}else if(key==119){
+				dir=2;
+			}else if(key==115){
+				dir=3;
+			}
+		}
+// 		
+// 		直接写这个也可以用
+// 		document.οnkeypress=function(evt){
+// 			let e = evt || event;
+// 			let key = e.keyCode = e.which = e.charCode;
+// 			if(key==97){
+// 				newLeft -= box.width;
+// 			}else if(key==100){
+// 				newLeft += box.width;
+// 			}else if(key==119){
+// 				newTop -= box.height;
+// 			}else if(key==115){
+// 				newTop += box.height;
+// 			}
+// 		}
+// 
+		let time = null;//置空定时器
+		time=setInterval(function(){
+			let gameMap=document.getElementById("gameMap");
+			//蛇头移动snake
+			let snakehead=snake[snake.length-1];//因为下标是从0开始的,所以蛇的长度减一就是现在蛇头,现在snakehead就是蛇头 
+			let newTop=snakehead.offsetTop //蛇头的offsetTop 
+			let newLeft=snakehead.offsetLeft;//蛇头的offsetLeft 
+			if(dir==0){
+				newLeft -= box.width;
+			}else if(dir==1){
+				newLeft += box.width;
+			}else if(dir==2){
+				newTop -= box.height
+			}else if(dir==3){
+				newTop += box.height;
+			}
+			
+// 			
+			//除蛇头外身体移动-蛇节
+			for(let i=0;i<snake.length-1;i++){
+				snake[i].style.top=snake[i+1].offsetTop+"px";//每个蛇的身体部分span的坐标都等于前一个的坐标
+				snake[i].style.left=snake[i+1].offsetLeft+"px";
+			}		
+			
+			snakehead.style.left=newLeft+"px";
+			snakehead.style.top=newTop+"px";
+			
+// 			 //如果超出边界，游戏结束
+// 			 
+// 			//减去一个盒子的高度的原因因为left是以容器的最上面算的,所以减去才刚好
+			if(newLeft>gameMap.offsetWidth-box.height){
+				clearTimeout(time);
+				h1.style.display = "block";
+				h3.style.display = "block";
+				h1.innerText="Game"+""+""+""+"Over";
+				h3.innerText="撞到墙壁";
+				h1.onclick=null;
+				newLeft==gameMap.offsetWidth+"px";
+				newLeft=gameMap.offsetWidth+"px"
+			}
+			if(newLeft<0){
+				clearTimeout(time);
+				h1.style.display = "block";
+				h3.style.display = "block";
+				h1.innerText="Game"+""+""+""+"Over";
+				h3.innerText="撞到墙壁";
+				h1.onclick=null;
+				newLeft=0;
+			}
+			if(newTop<0){
+				clearTimeout(time);
+				h1.style.display = "block";
+				h3.style.display = "block";
+				h1.innerText="Game"+""+""+""+"Over";
+				h3.innerText="撞到墙壁";
+				h1.onclick=null;
+				newTop=0;
+			}
+			if(newTop>gameMap.offsetHeight-box.height){
+				clearTimeout(time);
+				h1.style.display = "block";
+				h3.style.display = "block";
+				h1.innerText="Game"+""+""+""+"Over";
+				h1.onclick=null;
+				h3.innerText="撞到墙壁";
+				newTop=gameMap.offsetTop+"px";
+			}
+			
+			//判断吃掉自己
+			// for(let i=1; i<snake.length; i++){
+			// 	if(newLeft==snake[i].offsetLeft && newTop==snake[i].offsetTop){
+			// 		clearTimeout(time);
+			// 		h1.style.display = "block";
+			// 		h3.style.display = "block";
+			// 		h1.innerText="Game"+""+""+""+"Over";
+			// 		h1.οnclick=null;
+			// 		h3.innerText="吃掉自己";
+			// 		newTop=snake[i].offsetTop+"px";
+			// 		newLeft=snake[i].offsetLeft+"px";
+			// 	}
+			// }
+// 			 
+// 			//4.判断吃到食物
+// 			
+// 			//只要蛇头的left和top和food的left,top相等了,说明吃到食物了
+			if(newLeft==food.offsetLeft && newTop==food.offsetTop){
+				i++
+				food.className="snake";//给food声明一个class名,目的通过css改变样式
+				snake.push(food);
+				createFood();
+				sum.innerText="您的得分："+i+"分";
+			}
+			
+		},100)
+// 		
+// 		//3.创建食物
+		let food = null;
+		function createFood(){
+			let gameMap=document.getElementById("gameMap"); //获取游戏地图
+			food=document.createElement("span");//创建一个span节点
+			food.className="food";
+			food.style.width=box.width+"px";
+			food.style.height=box.height+"px";
+			food.style.left=Math.floor((gameMap.offsetWidth-2)/box.width*Math.random())*box.width+"px";
+			food.style.top=Math.floor((gameMap.offsetHeight-2)/box.height*Math.random())*box.height+"px";
+			gameMap.appendChild(food);
+		}
+		createFood();
+ 	}
+</script>

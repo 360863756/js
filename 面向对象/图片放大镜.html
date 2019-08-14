@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .box1{
+            width: 533px;
+            height: 300px;
+            position: relative;
+        }
+        .box1 span{
+            width: 133.25px;
+            height: 75px;
+            /* border-radius: 75px; */
+            position: absolute;
+            top:0px;
+            left: 0px; 
+            background: #ccc;
+            opacity: 0.3;
+            display: none;
+        }
+        .box1 img{
+            width: 533px;
+            height: 300px;
+        }
+        .box2{
+            display: none;
+            width: 533px;
+            height: 300px;
+            overflow: hidden;
+            position: absolute;
+            left: 560px;
+            top: 50px;
+            /* border-radius:150px ; */
+        }
+        .box2 img{
+           width:2132px;
+           height: 1200px; 
+           position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+    </style>
+    <script src="tools.js"></script>
+</head>
+<body>
+    <div class="box1"><img src="img/1.jpg" alt=""><span></span></div>
+    <div class="box2"><img src="img/1.jpg" alt=""></div>
+    <script>
+        class Glass{
+            constructor(){
+                this.box1 = document.querySelector(".box1")
+                this.box2 = document.querySelector(".box2")
+                this.img1 = document.querySelector(".box1 img")
+                this.img2 = document.querySelector(".box2 img")
+                this.span = document.querySelector("span")
+                this.spanMove()
+            }
+            spanMove(){
+                this.box1.onmousemove = (e)=>{
+                    var eleft = e.clientX;
+                    var etop = e.clientY;
+                    var left = eleft-this.span.offsetWidth/2-this.box1.offsetLeft;
+                    var top  = etop-this.span.offsetHeight/2-this.box1.offsetTop;
+                    this.span.style.display = "block";
+                    this.box2.style.display = "block";
+                    if(left<0)left=0;
+                    if(top<0)top = 0;
+                    if(left>this.box1.offsetWidth-this.span.offsetWidth)
+                    left=this.box1.offsetWidth-this.span.offsetWidth;
+                    if(top>this.box1.offsetHeight-this.span.offsetHeight)
+                    top=this.box1.offsetHeight-this.span.offsetHeight;
+                    tools.css(this.span , {
+                        left: left +"px",
+                        top : top +"px"
+                    })
+                    this.box2move(left,top)
+                }
+                this.box1.onmouseleave = ()=>{
+                    this.span.style.display = "";
+                    this.box2.style.display = "";
+                }
+            }
+            box2move(left , top ){
+                console.log(1)
+                tools.css(this.img2,{
+                    left: -4*left +"px",
+                    top : -4*top +"px"
+                })
+            }
+        }
+        new Glass();
+    </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>购物车</title>  
+    <style>  
+    	*{
+    		margin:0;
+    		padding:0;
+    	}
+        #addToCart {  
+            position: fixed;  
+            left: 600px;  
+            cursor: pointer;  
+            width: 100px;  
+            height: 40px;  
+            line-height: 40px;  
+            border: 1px solid deeppink;  
+            text-align: center;  
+            color: deeppink;  
+            top:500px;
+        }  
+        #addToCart:hover {  
+            color: #fff;  
+            background-color: deeppink;  
+        }  
+  
+        #shopCart {  
+            position: fixed;  
+            right: 0;  
+            top: 200px;  
+            color: red;  
+        }  
+        #shopNum{
+        	width: 60px;
+        	height: 25px;
+        	background: deeppink;
+        	color:black;
+        	text-align: center;
+        	line-height: 25px;
+        }
+        .active{
+        	width: 25px;
+        	height: 25px;
+        	background: skyblue;
+        	position: absolute;
+        }
+    </style>
+	<body>
+		<div id="addToCart">  
+		   添加到购物车  
+		</div>  	
+		<div id="shopCart">  
+		    购物车  
+		  <p id="shopNum">0</p>
+		</div>
+	</body>
+</html>  
+<script src="tools.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+  var body = document.querySelector("body")
+  var addToCart = document.querySelector("#addToCart")
+  var shopCart = document.querySelector("#shopCart")
+  var shopNum = document.querySelector("#shopNum")
+  addToCart.onclick = function (){
+    var div = document.createElement("div")
+    div.className = "active"
+    body.appendChild(div)
+    tools.css(div,{
+      left : addToCart.offsetLeft+addToCart.offsetWidth/3 + "px",
+      top : addToCart.offsetTop+ "px"
+    })
+    let x1=addToCart.offsetLeft+addToCart.offsetWidth/3,
+        y1=addToCart.offsetTop,
+        x2=shopCart.offsetLeft - 150,
+        y2=shopCart.offsetTop - 100,
+        x3=shopCart.offsetLeft,
+        y3=shopCart.offsetTop;
+    var a = -((y2-y3)*x1 - (x2-x3)*y1 + x2*y3 - x3*y2) / ((x2-x3)*(x1-x2)*(x1-x3));
+    var b = ((y2-y3)*x1*x1 + x2*x2*y3 - x3*x3*y2 - (x2*x2 - x3*x3)*y1) / ((x2-x3)*(x1-x2)*(x1-x3));
+    var c = ((x2*y3 - x3*y2)*x1*x1 - (x2*x2*y3 - x3*x3*y2)*x1 + (x2*x2*x3 - x2*x3*x3)*y1) / ((x2-x3)*(x1-x2)*(x1-x3));
+    var left = x1;
+    var timer = setInterval(function (){
+      var color ="#"
+      for(var i = 0 ; i<6;i++){
+      color +=parseInt(Math.random()*16).toString(16)
+      }
+      left+=8
+      var top = a*left*left+b*left+c
+      tools.css(div,{
+      left : left + "px",
+      top : top+ "px",
+      background:color
+    })
+    if(left>shopCart.offsetLeft){
+      clearInterval(timer)
+      body.removeChild(div)
+      shopNum.innerHTML = parseInt(shopNum.innerHTML) +1
+    }
+    },30)
+
+  }
+  // setInterval(function(){
+  //   addToCart.onclick();
+  // },10)
+
+}
+</script>
+
